@@ -4,7 +4,7 @@ import struct
 import time
 import json
 import os
-import base64
+import sys
 from http.server import BaseHTTPRequestHandler
 
 TOTP_SECRET = os.environ.get('TOTP_SECRET', '6WITODDILRU5DOS6LNRDFHN6FEXF4X4O')
@@ -80,7 +80,7 @@ class handler(BaseHTTPRequestHandler):
         # Log the attempt
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())
         status = 'SUCCESS' if valid else 'FAILED'
-        print(f"[AUTH {status}] {timestamp} | User: {username} | IP: {ip}")
+        print(f"[AUTH {status}] {timestamp} | User: {username} | IP: {ip}", file=sys.stderr)
 
         if valid:
             self.send_response(200)
