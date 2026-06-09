@@ -1,8 +1,6 @@
-// === AUTH CONFIG ===
-const TOTP_SECRET = '6WITODDILRU5DOS6LNRDFHN6FEXF4X4O';
+// === AUTH ===
 let currentUser = null;
 
-// === AUTH FUNCTIONS ===
 async function handleLogin(event) {
     event.preventDefault();
     const username = document.getElementById('username').value.trim();
@@ -15,18 +13,29 @@ async function handleLogin(event) {
         return;
     }
 
-    const valid = await TOTP.verify(TOTP_SECRET, code);
-    if (valid) {
-        currentUser = username;
-        sessionStorage.setItem('quiz_user', username);
-        errorEl.classList.add('hidden');
-        document.getElementById('user-greeting').textContent = `Hola, ${username}`;
-        showScreen('menu');
-    } else {
-        errorEl.textContent = 'Código MFA inválido. Intentá de nuevo.';
+    try {
+        const res = await fetch('/api/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, code })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+            currentUser = username;
+            sessionStorage.setItem('quiz_user', username);
+            errorEl.classList.add('hidden');
+            document.getElementById('user-greeting').textContent = `Hola, ${username}`;
+            showScreen('menu');
+        } else {
+            errorEl.textContent = 'Código MFA inválido. Intentá de nuevo.';
+            errorEl.classList.remove('hidden');
+            document.getElementById('totp-code').value = '';
+            document.getElementById('totp-code').focus();
+        }
+    } catch (err) {
+        errorEl.textContent = 'Error de conexión. Intentá de nuevo.';
         errorEl.classList.remove('hidden');
-        document.getElementById('totp-code').value = '';
-        document.getElementById('totp-code').focus();
     }
 }
 
