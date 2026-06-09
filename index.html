@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS SAP - Preparación Examen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Menu Principal -->
+        <div id="menu" class="screen active">
+            <h1>🎓 AWS Solutions Architect Professional</h1>
+            <p class="subtitle">Preparación para el Examen</p>
+            <div class="menu-cards">
+                <div class="card" onclick="startExam()">
+                    <div class="card-icon">📝</div>
+                    <h2>Modo Examen</h2>
+                    <p>75 preguntas aleatorias<br>180 minutos<br>Simulación real del examen</p>
+                </div>
+                <div class="card" onclick="startPractice()">
+                    <div class="card-icon">🎯</div>
+                    <h2>Modo Práctica</h2>
+                    <p>Preguntas aleatorias<br>Sin límite de tiempo<br>Respuesta inmediata</p>
+                </div>
+                <div class="card" onclick="showStudyTopics()">
+                    <div class="card-icon">📚</div>
+                    <h2>Modo Estudio</h2>
+                    <p>Agrupado por temas<br>Pilares AWS<br>Estudio dirigido</p>
+                </div>
+            </div>
+            <div class="stats-bar">
+                <span id="total-questions">0</span> preguntas disponibles
+            </div>
+        </div>
+
+        <!-- Pantalla de Estudio por Temas -->
+        <div id="study-topics" class="screen">
+            <div class="header-bar">
+                <button onclick="goToMenu()">← Volver</button>
+                <h2>Modo Estudio - Seleccionar Tema</h2>
+            </div>
+            <div id="topics-list" class="topics-grid"></div>
+        </div>
+
+        <!-- Pantalla de Quiz -->
+        <div id="quiz" class="screen">
+            <div class="quiz-header">
+                <button onclick="endQuiz()">✕ Salir</button>
+                <div id="timer" class="timer hidden"></div>
+                <div class="progress">
+                    <span id="current-q">1</span>/<span id="total-q">75</span>
+                </div>
+            </div>
+            <div id="question-container">
+                <div id="question-text" class="question-text"></div>
+                <div id="options-container" class="options"></div>
+            </div>
+            <div class="quiz-footer">
+                <button id="btn-prev" onclick="prevQuestion()" disabled>← Anterior</button>
+                <button id="btn-check" onclick="checkAnswer()" class="hidden">Verificar</button>
+                <button id="btn-next" onclick="nextQuestion()">Siguiente →</button>
+                <button id="btn-finish" onclick="finishExam()" class="hidden btn-finish">Finalizar Examen</button>
+            </div>
+        </div>
+
+        <!-- Pantalla de Resultados -->
+        <div id="results" class="screen">
+            <div class="results-container">
+                <h2>📊 Resultados</h2>
+                <div id="score-circle" class="score-circle"></div>
+                <div id="results-details"></div>
+                <button onclick="goToMenu()" class="btn-primary">Volver al Menú</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
