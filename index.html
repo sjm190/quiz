@@ -15,10 +15,6 @@
                 <p class="subtitle">AWS Solutions Architect Professional</p>
                 <form id="login-form" onsubmit="handleLogin(event)">
                     <div class="form-group">
-                        <label for="username">Nombre</label>
-                        <input type="text" id="username" placeholder="Tu nombre" required autocomplete="off">
-                    </div>
-                    <div class="form-group">
                         <label for="totp-code">Código MFA (Authenticator)</label>
                         <input type="text" id="totp-code" placeholder="000000" maxlength="6" pattern="[0-9]{6}" required autocomplete="off" inputmode="numeric">
                     </div>
@@ -31,7 +27,6 @@
         <!-- Menu Principal -->
         <div id="menu" class="screen">
             <div class="user-bar">
-                <span id="user-greeting"></span>
                 <button onclick="logout()" class="btn-logout">Cerrar sesión</button>
             </div>
             <h1>🎓 AWS Solutions Architect Professional</h1>

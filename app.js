@@ -3,12 +3,11 @@ let currentUser = null;
 
 async function handleLogin(event) {
     event.preventDefault();
-    const username = document.getElementById('username').value.trim();
     const code = document.getElementById('totp-code').value.trim();
     const errorEl = document.getElementById('login-error');
 
-    if (!username || !code) {
-        errorEl.textContent = 'Completá todos los campos';
+    if (!code) {
+        errorEl.textContent = 'Ingresá el código MFA';
         errorEl.classList.remove('hidden');
         return;
     }
@@ -17,15 +16,14 @@ async function handleLogin(event) {
         const res = await fetch('/api/verify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, code })
+            body: JSON.stringify({ code })
         });
         const data = await res.json();
 
         if (data.success) {
-            currentUser = username;
-            sessionStorage.setItem('quiz_user', username);
+            currentUser = true;
+            sessionStorage.setItem('quiz_auth', 'true');
             errorEl.classList.add('hidden');
-            document.getElementById('user-greeting').textContent = `Hola, ${username}`;
             showScreen('menu');
         } else {
             errorEl.textContent = 'Código MFA inválido. Intentá de nuevo.';
@@ -41,17 +39,14 @@ async function handleLogin(event) {
 
 function logout() {
     currentUser = null;
-    sessionStorage.removeItem('quiz_user');
-    document.getElementById('username').value = '';
+    sessionStorage.removeItem('quiz_auth');
     document.getElementById('totp-code').value = '';
     showScreen('login');
 }
 
 function checkSession() {
-    const user = sessionStorage.getItem('quiz_user');
-    if (user) {
-        currentUser = user;
-        document.getElementById('user-greeting').textContent = `Hola, ${user}`;
+    if (sessionStorage.getItem('quiz_auth')) {
+        currentUser = true;
         showScreen('menu');
     }
 }

@@ -59,15 +59,15 @@ class handler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({'error': 'Invalid JSON'}).encode())
             return
 
-        username = data.get('username', '').strip()
+        username = data.get('username', 'anonymous').strip()
         code = data.get('code', '').strip()
 
-        if not username or not code:
+        if not code:
             self.send_response(400)
             self.send_header('Content-Type', 'application/json')
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
-            self.wfile.write(json.dumps({'error': 'Missing fields'}).encode())
+            self.wfile.write(json.dumps({'error': 'Missing code'}).encode())
             return
 
         # Get client IP
@@ -80,14 +80,14 @@ class handler(BaseHTTPRequestHandler):
         # Log the attempt
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())
         status = 'SUCCESS' if valid else 'FAILED'
-        print(f"[AUTH {status}] {timestamp} | User: {username} | IP: {ip}", file=sys.stderr)
+        print(f"[AUTH {status}] {timestamp} | IP: {ip}", file=sys.stderr)
 
         if valid:
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
-            self.wfile.write(json.dumps({'success': True, 'user': username}).encode())
+            self.wfile.write(json.dumps({'success': True}).encode())
         else:
             self.send_response(401)
             self.send_header('Content-Type', 'application/json')
