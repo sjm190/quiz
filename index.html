@@ -8,8 +8,32 @@
 </head>
 <body>
     <div id="app">
+        <!-- Login Screen -->
+        <div id="login" class="screen active">
+            <div class="login-container">
+                <h1>🔐 Acceso al Quiz</h1>
+                <p class="subtitle">AWS Solutions Architect Professional</p>
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="username">Nombre</label>
+                        <input type="text" id="username" placeholder="Tu nombre" required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="totp-code">Código MFA (Authenticator)</label>
+                        <input type="text" id="totp-code" placeholder="000000" maxlength="6" pattern="[0-9]{6}" required autocomplete="off" inputmode="numeric">
+                    </div>
+                    <p id="login-error" class="login-error hidden"></p>
+                    <button type="submit" class="btn-primary btn-login">Ingresar</button>
+                </form>
+            </div>
+        </div>
+
         <!-- Menu Principal -->
-        <div id="menu" class="screen active">
+        <div id="menu" class="screen">
+            <div class="user-bar">
+                <span id="user-greeting"></span>
+                <button onclick="logout()" class="btn-logout">Cerrar sesión</button>
+            </div>
             <h1>🎓 AWS Solutions Architect Professional</h1>
             <p class="subtitle">Preparación para el Examen</p>
             <div class="menu-cards">
@@ -74,6 +98,7 @@
             </div>
         </div>
     </div>
+    <script src="totp.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

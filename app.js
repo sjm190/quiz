@@ -1,8 +1,58 @@
+// === AUTH CONFIG ===
+const TOTP_SECRET = '6WITODDILRU5DOS6LNRDFHN6FEXF4X4O';
+let currentUser = null;
+
+// === AUTH FUNCTIONS ===
+async function handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value.trim();
+    const code = document.getElementById('totp-code').value.trim();
+    const errorEl = document.getElementById('login-error');
+
+    if (!username || !code) {
+        errorEl.textContent = 'Completá todos los campos';
+        errorEl.classList.remove('hidden');
+        return;
+    }
+
+    const valid = await TOTP.verify(TOTP_SECRET, code);
+    if (valid) {
+        currentUser = username;
+        sessionStorage.setItem('quiz_user', username);
+        errorEl.classList.add('hidden');
+        document.getElementById('user-greeting').textContent = `Hola, ${username}`;
+        showScreen('menu');
+    } else {
+        errorEl.textContent = 'Código MFA inválido. Intentá de nuevo.';
+        errorEl.classList.remove('hidden');
+        document.getElementById('totp-code').value = '';
+        document.getElementById('totp-code').focus();
+    }
+}
+
+function logout() {
+    currentUser = null;
+    sessionStorage.removeItem('quiz_user');
+    document.getElementById('username').value = '';
+    document.getElementById('totp-code').value = '';
+    showScreen('login');
+}
+
+function checkSession() {
+    const user = sessionStorage.getItem('quiz_user');
+    if (user) {
+        currentUser = user;
+        document.getElementById('user-greeting').textContent = `Hola, ${user}`;
+        showScreen('menu');
+    }
+}
+
+// === QUIZ APP ===
 let allQuestions = [];
 let quizQuestions = [];
 let currentIndex = 0;
 let answers = {};
-let mode = ''; // 'exam', 'practice', 'study'
+let mode = '';
 let timerInterval = null;
 let timeLeft = 0;
 
@@ -10,12 +60,11 @@ let timeLeft = 0;
 async function loadQuestions() {
     const res = await fetch('questions.json');
     const data = await res.json();
-    // Filter: only Spanish questions with options (1-625)
     allQuestions = data.filter(q => q.options && typeof q.options === 'object' && q.number <= 625);
     document.getElementById('total-questions').textContent = allQuestions.length;
 }
 
-// Topics/Pilares classification
+// Topics classification
 const topics = {
     'Complejidad Organizacional': {
         keywords: ['Organizations', 'SCP', 'multi-cuenta', 'OU', 'organizat', 'centraliz'],
@@ -73,7 +122,6 @@ function classifyQuestion(q) {
     return matched.length > 0 ? matched : ['Otros'];
 }
 
-// Shuffle array
 function shuffle(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -100,7 +148,7 @@ function startExam() {
     quizQuestions = shuffle(allQuestions).slice(0, 75);
     currentIndex = 0;
     answers = {};
-    timeLeft = 180 * 60; // 180 minutes in seconds
+    timeLeft = 180 * 60;
 
     document.getElementById('timer').classList.remove('hidden');
     document.getElementById('btn-check').classList.add('hidden');
@@ -133,7 +181,6 @@ function showStudyTopics() {
     const topicsList = document.getElementById('topics-list');
     topicsList.innerHTML = '';
 
-    // Classify all questions
     const topicCounts = {};
     const topicQuestions = {};
     for (const [topic, config] of Object.entries(topics)) {
@@ -152,7 +199,6 @@ function showStudyTopics() {
         });
     });
 
-    // Render topic cards
     for (const [topic, config] of Object.entries(topics)) {
         if (topicCounts[topic] > 0) {
             const card = document.createElement('div');
@@ -223,12 +269,10 @@ function renderQuestion() {
         container.appendChild(div);
     });
 
-    // Show previous answers in practice mode if already checked
     if (mode === 'practice' && answers[currentIndex + '_checked']) {
         showCorrectAnswer();
     }
 
-    // Update buttons
     document.getElementById('btn-prev').disabled = currentIndex === 0;
     
     if (mode === 'exam') {
@@ -241,12 +285,11 @@ function selectOption(key, div) {
     const correctAnswer = q.correct_answer;
     const isMultiple = correctAnswer.length > 1 && !correctAnswer.includes(' ');
 
-    if (answers[currentIndex + '_checked']) return; // Already checked in practice
+    if (answers[currentIndex + '_checked']) return;
 
     if (!answers[currentIndex]) answers[currentIndex] = [];
 
     if (isMultiple) {
-        // Multiple selection
         if (answers[currentIndex].includes(key)) {
             answers[currentIndex] = answers[currentIndex].filter(k => k !== key);
             div.classList.remove('selected');
@@ -255,14 +298,12 @@ function selectOption(key, div) {
             div.classList.add('selected');
         }
     } else {
-        // Single selection
         document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
         answers[currentIndex] = [key];
         div.classList.add('selected');
     }
 }
 
-// Check answer (practice mode)
 function checkAnswer() {
     if (!answers[currentIndex] || answers[currentIndex].length === 0) return;
     answers[currentIndex + '_checked'] = true;
@@ -289,7 +330,6 @@ function showCorrectAnswer() {
     });
 }
 
-// Navigation
 function nextQuestion() {
     if (currentIndex < quizQuestions.length - 1) {
         currentIndex++;
@@ -304,7 +344,6 @@ function prevQuestion() {
     }
 }
 
-// End quiz
 function endQuiz() {
     if (mode === 'exam') {
         if (!confirm('¿Seguro que querés salir? Perderás el progreso.')) return;
@@ -352,3 +391,4 @@ function formatTimeUsed() {
 
 // Init
 loadQuestions();
+checkSession();
