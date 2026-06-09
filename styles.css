@@ -54,6 +54,19 @@ body {
     border-radius: 6px;
 }
 
+.mfa-note {
+    color: #8b949e;
+    font-size: 0.8em;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.hint {
+    color: #8b949e;
+    font-size: 0.85em;
+    font-weight: normal;
+}
+
 .btn-login {
     width: 100%;
     padding: 14px;

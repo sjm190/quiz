@@ -80,7 +80,7 @@ class handler(BaseHTTPRequestHandler):
         # Log the attempt
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())
         status = 'SUCCESS' if valid else 'FAILED'
-        print(f"[AUTH {status}] {timestamp} | IP: {ip}", file=sys.stderr)
+        print(f"[AUTH {status}] {timestamp} | User: {username} | IP: {ip}", file=sys.stderr)
 
         if valid:
             self.send_response(200)

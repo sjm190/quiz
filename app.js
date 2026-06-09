@@ -3,6 +3,7 @@ let currentUser = null;
 
 async function handleLogin(event) {
     event.preventDefault();
+    const username = document.getElementById('username').value.trim();
     const code = document.getElementById('totp-code').value.trim();
     const errorEl = document.getElementById('login-error');
 
@@ -16,13 +17,14 @@ async function handleLogin(event) {
         const res = await fetch('/api/verify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code })
+            body: JSON.stringify({ username, code })
         });
         const data = await res.json();
 
         if (data.success) {
-            currentUser = true;
+            currentUser = username || 'Usuario';
             sessionStorage.setItem('quiz_auth', 'true');
+            sessionStorage.setItem('quiz_user', currentUser);
             errorEl.classList.add('hidden');
             showScreen('menu');
         } else {
@@ -40,13 +42,15 @@ async function handleLogin(event) {
 function logout() {
     currentUser = null;
     sessionStorage.removeItem('quiz_auth');
+    sessionStorage.removeItem('quiz_user');
+    document.getElementById('username').value = '';
     document.getElementById('totp-code').value = '';
     showScreen('login');
 }
 
 function checkSession() {
     if (sessionStorage.getItem('quiz_auth')) {
-        currentUser = true;
+        currentUser = sessionStorage.getItem('quiz_user') || 'Usuario';
         showScreen('menu');
     }
 }
