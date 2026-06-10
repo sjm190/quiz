@@ -5,6 +5,10 @@
       "use": "@vercel/python"
     },
     {
+      "src": "api/logs.py",
+      "use": "@vercel/python"
+    },
+    {
       "src": "index.html",
       "use": "@vercel/static"
     },
@@ -23,6 +27,7 @@
   ],
   "routes": [
     { "src": "/api/verify", "dest": "/api/verify.py" },
+    { "src": "/api/logs", "dest": "/api/logs.py" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }

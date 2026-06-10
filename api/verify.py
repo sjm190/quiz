@@ -5,13 +5,15 @@ import time
 import json
 import os
 import sys
+import urllib.request
 from http.server import BaseHTTPRequestHandler
 
 TOTP_SECRET = os.environ.get('TOTP_SECRET', '6WITODDILRU5DOS6LNRDFHN6FEXF4X4O')
+KV_REST_API_URL = os.environ.get('KV_REST_API_URL', '')
+KV_REST_API_TOKEN = os.environ.get('KV_REST_API_TOKEN', '')
 
 
 def base32_decode(encoded):
-    """Decode base32 string to bytes."""
     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'
     encoded = encoded.upper().rstrip('=')
     bits = ''
@@ -25,7 +27,6 @@ def base32_decode(encoded):
 
 
 def generate_totp(secret, time_step=30, digits=6, counter_offset=0):
-    """Generate TOTP code for given time."""
     key = base32_decode(secret)
     counter = int(time.time()) // time_step + counter_offset
     counter_bytes = struct.pack('>Q', counter)
@@ -37,11 +38,30 @@ def generate_totp(secret, time_step=30, digits=6, counter_offset=0):
 
 
 def verify_totp(secret, token, window=1):
-    """Verify TOTP with time window tolerance."""
     for offset in range(-window, window + 1):
         if generate_totp(secret, counter_offset=offset) == token:
             return True
     return False
+
+
+def save_log_to_kv(log_entry):
+    """Save log entry to Upstash Redis using REST API."""
+    if not KV_REST_API_URL or not KV_REST_API_TOKEN:
+        return
+    try:
+        # Use LPUSH to add to a list called "auth_logs"
+        url = f"{KV_REST_API_URL}/lpush/auth_logs/{urllib.request.quote(json.dumps(log_entry))}"
+        req = urllib.request.Request(url, method='GET')
+        req.add_header('Authorization', f'Bearer {KV_REST_API_TOKEN}')
+        urllib.request.urlopen(req, timeout=3)
+
+        # Keep only last 500 entries
+        trim_url = f"{KV_REST_API_URL}/ltrim/auth_logs/0/499"
+        trim_req = urllib.request.Request(trim_url, method='GET')
+        trim_req.add_header('Authorization', f'Bearer {KV_REST_API_TOKEN}')
+        urllib.request.urlopen(trim_req, timeout=3)
+    except Exception as e:
+        print(f"[KV ERROR] {e}", file=sys.stderr)
 
 
 class handler(BaseHTTPRequestHandler):
@@ -77,10 +97,18 @@ class handler(BaseHTTPRequestHandler):
 
         valid = verify_totp(TOTP_SECRET, code)
 
-        # Log the attempt
+        # Log
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())
         status = 'SUCCESS' if valid else 'FAILED'
         print(f"[AUTH {status}] {timestamp} | User: {username} | IP: {ip}", file=sys.stderr)
+
+        # Persist to KV
+        save_log_to_kv({
+            'timestamp': timestamp,
+            'user': username,
+            'ip': ip,
+            'status': status
+        })
 
         if valid:
             self.send_response(200)
