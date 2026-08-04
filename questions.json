@@ -119,7 +119,8 @@
       "A": "Cree una puerta de enlace de tránsito en la cuenta de infraestructura.",
       "B": "Habilite el uso compartido de recursos desde la cuenta de administración de AWS Organizations.",
       "C": "Crear VPC en cada cuenta de AWS dentro de la organización en AWS Organizations. Configure las VPC para que compartan el mismo rango de CIDR y subredes como la VPC en la cuenta de infraestructura. Conecte las VPC de cada cuenta individual con la VPC de la cuenta de infraestructura.",
-      "D": "Cree un recurso compartido en AWS Resource Access Manager en la cuenta de infraestructura. Seleccione la unidad organizativa de AWS Organizations específica que utilizar la red compartida. Seleccione cada subred para asociarla con el recurso compartido. E. Cree un recurso compartido en AWS Resource Access Manager en la cuenta de infraestructura. Seleccione la unidad organizativa de AWS Organizations específica que utilizar la red compartida. Seleccione cada lista de prefijos para asociarla con el recurso compartido."
+      "D": "Cree un recurso compartido en AWS Resource Access Manager en la cuenta de infraestructura. Seleccione la unidad organizativa de AWS Organizations específica que utilizar la red compartida. Seleccione cada subred para asociarla con el recurso compartido.",
+      "E": "Cree un recurso compartido en AWS Resource Access Manager en la cuenta de infraestructura. Seleccione la unidad organizativa de AWS Organizations específica que utilizar la red compartida. Seleccione cada lista de prefijos para asociarla con el recurso compartido."
     },
     "correct_answer": "BD"
   },
@@ -296,7 +297,8 @@
       "A": "Cree una API REST de Amazon API Gateway. Configure esta API con integraciones directas a DynamoDB mediante la integración de AWS de API Gateway tipo.",
       "B": "Cree una API HTTP de Amazon API Gateway. Configure esta API con integraciones directas a Dynamo DB utilizando AWS de API Gateway tipo de integración.",
       "C": "Cree una API HTTP de Amazon API Gateway. Configure esta API con integraciones a funciones de AWS Lambda que devuelven datos del Tablas de DynamoDB.",
-      "D": "Crear un acelerador en AWS Global Accelerator. Configure este acelerador con integraciones de funciones de AWS Lambda@Edge que devuelven datos de las tablas de DynamoDB. E. Crear un equilibrador de carga de red. Configure reglas de escucha para reenviar solicitudes a las funciones de AWS Lambda adecuadas."
+      "D": "Crear un acelerador en AWS Global Accelerator. Configure este acelerador con integraciones de funciones de AWS Lambda@Edge que devuelven datos de las tablas de DynamoDB.",
+      "E": "Crear un equilibrador de carga de red. Configure reglas de escucha para reenviar solicitudes a las funciones de AWS Lambda adecuadas."
     },
     "correct_answer": "AC"
   },
@@ -331,7 +333,8 @@
       "A": "Desde la cuenta de administración, comparta la puerta de enlace de tránsito con cuentas de miembros mediante AWS Resource Access Manager.",
       "B": "Desde la cuenta de administración, comparta la puerta de enlace de tránsito con cuentas de miembros mediante un SCP de AWS Organizations.",
       "C": "Lanzar un conjunto de pilas de AWS CloudFormation desde la cuenta de administración que crea automáticamente una nueva VPC y una puerta de enlace de tránsito de VPC. archivo adjunto en una cuenta de miembro. Asocie el archivo adjunto con la puerta de enlace de tránsito en la cuenta de administración mediante la puerta de enlace de tránsito Identificación.",
-      "D": "Lanzar un conjunto de pilas de AWS CloudFormation desde la cuenta de administración que crea automáticamente una nueva VPC y un tránsito de intercambio de tráfico adjunto de puerta de enlace en una cuenta de miembro. Comparta el archivo adjunto con la puerta de enlace de tránsito en la cuenta de administración mediante un tránsito Rol vinculado al servicio de puerta de enlace. E. Desde la cuenta de administración, comparta la puerta de enlace de tránsito con cuentas de miembros mediante AWS Service Catalog."
+      "D": "Lanzar un conjunto de pilas de AWS CloudFormation desde la cuenta de administración que crea automáticamente una nueva VPC y un tránsito de intercambio de tráfico adjunto de puerta de enlace en una cuenta de miembro. Comparta el archivo adjunto con la puerta de enlace de tránsito en la cuenta de administración mediante un tránsito Rol vinculado al servicio de puerta de enlace.",
+      "E": "Desde la cuenta de administración, comparta la puerta de enlace de tránsito con cuentas de miembros mediante AWS Service Catalog."
     },
     "correct_answer": "AC"
   },
@@ -531,7 +534,8 @@
       "A": "Utilice el punto final del clúster de la base de datos de Aurora.",
       "B": "Utilice RDS Proxy para configurar un grupo de conexiones al punto final del lector de la base de datos de Aurora.",
       "C": "Utilice la función de simultaneidad aprovisionada de Lambda.",
-      "D": "Mueva el código para abrir la conexión de la base de datos en la función Lambda fuera del controlador de eventos. E. Cambie el punto final de API Gateway a un punto final optimizado para el borde."
+      "D": "Mueva el código para abrir la conexión de la base de datos en la función Lambda fuera del controlador de eventos.",
+      "E": "Cambie el punto final de API Gateway a un punto final optimizado para el borde."
     },
     "correct_answer": "BD"
   },
@@ -700,7 +704,8 @@
       "A": "Modifique la implementación de la aplicación creando una imagen de Docker que contenga el código de la aplicación. Publicar la imagen en Amazon Elastic Registro de Contenedores (Amazon ECR).",
       "B": "Cree una nueva definición de tarea de Amazon Elastic Container Service (Amazon ECS) con un tipo de compatibilidad de AWS Fargate. Configurar la tarea definición para utilizar la nueva imagen en Amazon Elastic Container Registry (Amazon ECR). Ajuste la función Lambda para invocar una tarea ECS utilizando la definición de tarea de ECS cuando llega un nuevo archivo a Amazon S3.",
       "C": "Cree una máquina de estado de AWS Step Functions con un estado Paralelo para invocar la función Lambda. Aumentar la simultaneidad aprovisionada de la función Lambda.",
-      "D": "Cree una nueva definición de tarea de Amazon Elastic Container Service (Amazon ECS) con un tipo de compatibilidad de Amazon EC2. Configurar la tarea definición para utilizar la nueva imagen en Amazon Elastic Container Registry (Amazon ECR). Ajuste la función Lambda para invocar una tarea ECS utilizando la definición de tarea de ECS cuando llega un nuevo archivo a Amazon S3. E. Modificar la aplicación para almacenar imágenes en Amazon Elastic File System (Amazon EFS) y almacenar metadatos en una base de datos de Amazon RDS instancia. Ajuste la función Lambda para montar el recurso compartido de archivos EFS."
+      "D": "Cree una nueva definición de tarea de Amazon Elastic Container Service (Amazon ECS) con un tipo de compatibilidad de Amazon EC2. Configurar la tarea definición para utilizar la nueva imagen en Amazon Elastic Container Registry (Amazon ECR). Ajuste la función Lambda para invocar una tarea ECS utilizando la definición de tarea de ECS cuando llega un nuevo archivo a Amazon S3.",
+      "E": "Modificar la aplicación para almacenar imágenes en Amazon Elastic File System (Amazon EFS) y almacenar metadatos en una base de datos de Amazon RDS instancia. Ajuste la función Lambda para montar el recurso compartido de archivos EFS."
     },
     "correct_answer": "AB"
   },
@@ -790,7 +795,8 @@
       "A": "Habilite la aceleración de transferencia de S3 en el depósito de S3. Configure la aplicación para utilizar el punto final de Transfer Acceleration para las cargas.",
       "B": "Configure un depósito de S3 en cada región para recibir las cargas. Utilice la replicación entre regiones de S3 para copiar los archivos a la distribución S3 cubo.",
       "C": "Configure Amazon Route 53 con enrutamiento basado en latencia para enrutar las cargas a la región del depósito S3 más cercana.",
-      "D": "Configure la aplicación para dividir los archivos de video en trozos. Utilice una carga de varias partes para transferir archivos a Amazon S3. E. Modifique la aplicación para agregar prefijos aleatorios a los archivos antes de cargarlos."
+      "D": "Configure la aplicación para dividir los archivos de video en trozos. Utilice una carga de varias partes para transferir archivos a Amazon S3.",
+      "E": "Modifique la aplicación para agregar prefijos aleatorios a los archivos antes de cargarlos."
     },
     "correct_answer": "AD"
   },
@@ -901,7 +907,8 @@
       "A": "Habilite la aceleración de transferencia de S3 en el depósito de S3. Asegúrese de que la aplicación web utilice las URL firmadas de Transfer Acceleration.",
       "B": "Crear un acelerador en AWS Global Accelerator. Adjunte el acelerador a la distribución de CloudFront.",
       "C": "Cambiar los puntos finales regionales de API Gateway a puntos finales optimizados para el borde.",
-      "D": "Aprovisionar toda la pila en otras dos ubicaciones repartidas por todo el mundo. Utilice bases de datos globales en el clúster Aurora Serverless. E. Agregue un proxy de Amazon RDS entre las funciones Lambda y la base de datos Aurora Serverless."
+      "D": "Aprovisionar toda la pila en otras dos ubicaciones repartidas por todo el mundo. Utilice bases de datos globales en el clúster Aurora Serverless.",
+      "E": "Agregue un proxy de Amazon RDS entre las funciones Lambda y la base de datos Aurora Serverless."
     },
     "correct_answer": "AC"
   },
@@ -1269,7 +1276,8 @@
       "A": "Utilice Amazon Kinesis Data Firehose para almacenar eventos en el buffer. Cree una función AWS Lambda para procesar y transformar eventos.",
       "B": "Cree un flujo de datos de Amazon Kinesis para almacenar en buffer los eventos. Cree una función AWS Lambda para procesar y transformar eventos.",
       "C": "Configurar un clúster de base de datos de Amazon Aurora PostgreSQL para recibir eventos. Utilice Amazon QuickSight para leer desde la base de datos y crear visualizaciones y paneles de control en tiempo real.",
-      "D": "Configurar Amazon Elasticsearch Service (Amazon ES) para recibir eventos. Utilice el punto final de Kibana implementado con Amazon ES para crear visualizaciones y paneles de control en tiempo real. E. Configurar una instancia de base de datos de Amazon Neptune para recibir eventos. Utilice Amazon QuickSight para leer desde la base de datos y crear imágenes casi en tiempo real. visualizaciones y paneles de control."
+      "D": "Configurar Amazon Elasticsearch Service (Amazon ES) para recibir eventos. Utilice el punto final de Kibana implementado con Amazon ES para crear visualizaciones y paneles de control en tiempo real.",
+      "E": "Configurar una instancia de base de datos de Amazon Neptune para recibir eventos. Utilice Amazon QuickSight para leer desde la base de datos y crear imágenes casi en tiempo real. visualizaciones y paneles de control."
     },
     "correct_answer": "AD"
   },
@@ -1315,7 +1323,9 @@
       "A": "Implementar un entorno de zona de aterrizaje mediante AWS Control Tower. Inscribir cuentas e invitar a cuentas existentes a la organización resultante en organizaciones de AWS.",
       "B": "Habilite AWS Security Hub en todas las cuentas para administrar el acceso entre cuentas. Recopile hallazgos a través de AWS CloudTrail para forzar el inicio de sesión en MFA.",
       "C": "Crear puertas de enlace de tránsito y archivos adjuntos de VPC de puerta de enlace de tránsito en cada cuenta. Configure tablas de rutas apropiadas.",
-      "D": "Configurar y habilitar AWS IAM Identity Center (AWS Single Sign-On). Cree conjuntos de permisos adecuados con la MFA requerida para los existentes cuentas. E. Habilite AWS Control Tower en todas las cuentas para administrar el enrutamiento entre cuentas. Recopile hallazgos a través de AWS CloudTrail para forzar MFA iniciar sesión. F. Crear usuarios y grupos de IAM. Configure MFA para todos los usuarios. Configure grupos de usuarios y grupos de identidades de Amazon Cognoto para administrar el acceso a cuentas y entre cuentas."
+      "D": "Configurar y habilitar AWS IAM Identity Center (AWS Single Sign-On). Cree conjuntos de permisos adecuados con la MFA requerida para los existentes cuentas.",
+      "E": "Habilite AWS Control Tower en todas las cuentas para administrar el enrutamiento entre cuentas. Recopile hallazgos a través de AWS CloudTrail para forzar MFA iniciar sesión.",
+      "F": "Crear usuarios y grupos de IAM. Configure MFA para todos los usuarios. Configure grupos de usuarios y grupos de identidades de Amazon Cognoto para administrar el acceso a cuentas y entre cuentas."
     },
     "correct_answer": "ACD"
   },
@@ -1348,7 +1358,8 @@
       "A": "Implementar la herramienta de seguridad en instancias EC2 en un nuevo grupo de Auto Scaling en la VPC existente",
       "B": "Implementar la aplicación web detrás de un balanceador de carga de red",
       "C": "Implementar un balanceador de carga de aplicaciones frente a las instancias de la herramienta de seguridad",
-      "D": "Proporcione un equilibrador de carga de puerta de enlace para cada zona de disponibilidad para redirigir el tráfico a la herramienta de seguridad. E. Proporcionar una puerta de enlace de tránsito para facilitar la comunicación entre VPC."
+      "D": "Proporcione un equilibrador de carga de puerta de enlace para cada zona de disponibilidad para redirigir el tráfico a la herramienta de seguridad.",
+      "E": "Proporcionar una puerta de enlace de tránsito para facilitar la comunicación entre VPC."
     },
     "correct_answer": "AD"
   },
@@ -1487,7 +1498,8 @@
       "A": "Implementar la cola SQS con la función Lambda en otras regiones.",
       "B": "Suscribir el tema SNS de cada región a la cola SQS.",
       "C": "Suscribir la cola SQS de cada región al tema SNS.",
-      "D": "Configurar la cola SQS para publicar URL en temas de SNS en cada región. E. Implementar el tema SNS y la función Lambda en otras regiones."
+      "D": "Configurar la cola SQS para publicar URL en temas de SNS en cada región.",
+      "E": "Implementar el tema SNS y la función Lambda en otras regiones."
     },
     "correct_answer": "AC"
   },
@@ -1599,7 +1611,8 @@
       "A": "Configure el punto final de AWS Global Accelerator para el depósito S3 en eu-west-1. Configure grupos de puntos finales para los puertos TCP 80 y 443 en us- este-1.",
       "B": "Cree un nuevo depósito S3 en us-east-1. Configure la replicación entre regiones de S3 para sincronizar desde el depósito de S3 en eu-west-1.",
       "C": "Utilice Lambda@Edge para modificar las solicitudes de Norteamérica para utilizar el punto final de S3 Transfer Acceleration en us-east-1.",
-      "D": "Utilice Lambda@Edge para modificar las solicitudes de Norteamérica para utilizar el depósito S3 en us-east-1. E. Configure el punto final de AWS Global Accelerator para us-east-1 como origen en la distribución de CloudFront. Utilice Lambda@Edge para modificar solicitudes de América del Norte para utilizar el nuevo origen."
+      "D": "Utilice Lambda@Edge para modificar las solicitudes de Norteamérica para utilizar el depósito S3 en us-east-1.",
+      "E": "Configure el punto final de AWS Global Accelerator para us-east-1 como origen en la distribución de CloudFront. Utilice Lambda@Edge para modificar solicitudes de América del Norte para utilizar el nuevo origen."
     },
     "correct_answer": "BD"
   },
@@ -1710,7 +1723,9 @@
       "A": "Cargue contenido informativo estático en el depósito de S3.",
       "B": "Cree una nueva distribución de CloudFront. Establezca el depósito S3 como origen.",
       "C": "Establecer el depósito de S3 como segundo origen en la distribución de CloudFront original. Configurar la distribución y el depósito S3 para usar un origen identidad de acceso (OAI).",
-      "D": "Durante el mantenimiento semanal, edite el comportamiento de caché predeterminado para usar el origen S3. Revertir el cambio cuando se complete el mantenimiento. E. Durante el mantenimiento semanal, cree un comportamiento de caché para el origen S3 en la nueva distribución. Establezca el patrón de ruta en \\ Establezca el prioridad a 0. Elimine el comportamiento de la caché cuando se complete el mantenimiento. F. Durante el mantenimiento semanal, configure Elastic Beanstalk para atender el tráfico desde el depósito S3."
+      "D": "Durante el mantenimiento semanal, edite el comportamiento de caché predeterminado para usar el origen S3. Revertir el cambio cuando se complete el mantenimiento.",
+      "E": "Durante el mantenimiento semanal, cree un comportamiento de caché para el origen S3 en la nueva distribución. Establezca el patrón de ruta en \\ Establezca el prioridad a 0. Elimine el comportamiento de la caché cuando se complete el mantenimiento.",
+      "F": "Durante el mantenimiento semanal, configure Elastic Beanstalk para atender el tráfico desde el depósito S3."
     },
     "correct_answer": "ACD"
   },
@@ -1899,7 +1914,8 @@
       "A": "Compre AWS Business Support o AWS Enterprise Support para la cuenta.",
       "B": "Active AWS Trusted Advisor y revise las recomendaciones de \"Instancias Amazon EC2 de baja utilización\".",
       "C": "Instale el agente de Amazon CloudWatch y configure la recopilación de métricas de memoria en las instancias EC2.",
-      "D": "Configure AWS Compute Optimizer en la cuenta de AWS para recibir hallazgos y recomendaciones de optimización. E. Crear un Plan de Ahorro de Instancias EC2 para las Regiones de AWS, familias de instancias y sistemas operativos de interés."
+      "D": "Configure AWS Compute Optimizer en la cuenta de AWS para recibir hallazgos y recomendaciones de optimización.",
+      "E": "Crear un Plan de Ahorro de Instancias EC2 para las Regiones de AWS, familias de instancias y sistemas operativos de interés."
     },
     "correct_answer": "CD"
   },
@@ -2215,7 +2231,8 @@
       "A": "Cree una puerta de enlace de Direct Connect en la región más cercana al centro de datos. Conecte la conexión Direct Connect a Direct Connect puerta de enlace. Utilice la puerta de enlace de Direct Connect para conectar las VPC en las otras dos regiones.",
       "B": "Configure conexiones Direct Connect adicionales desde el centro de datos local a las otras dos regiones.",
       "C": "Crear una VIF privada. Establezca una conexión VPN de sitio a sitio de AWS a través del VIF privado a las VPC en las otras dos regiones.",
-      "D": "Crear un VIF público. Establezca una conexión VPN de sitio a sitio de AWS a través del VIF público a las VPC en las otras dos regiones. E. Utilice el emparejamiento de VPC para establecer una conexión entre las VPC en las regiones. Cree una VIF privada con Direct Connect existente. conexión para conectarse a las VPC emparejadas."
+      "D": "Crear un VIF público. Establezca una conexión VPN de sitio a sitio de AWS a través del VIF público a las VPC en las otras dos regiones.",
+      "E": "Utilice el emparejamiento de VPC para establecer una conexión entre las VPC en las regiones. Cree una VIF privada con Direct Connect existente. conexión para conectarse a las VPC emparejadas."
     },
     "correct_answer": "AD"
   },
@@ -2226,7 +2243,9 @@
       "A": "Habilite AWS Config en todas las cuentas",
       "B": "Habilite Amazon GuardDuty en todas las cuentas",
       "C": "Habilitar todas las funciones para la organización.",
-      "D": "Utilice AWS Firewall Manager para implementar reglas de AWS WAF en todas las cuentas para todas las distribuciones de CloudFront. E. Utilice AWS Shield Advanced para implementar reglas de AWS WAF en todas las cuentas para todas las distribuciones de CloudFront. F. Utilice AWS Security Hub para implementar reglas de AWS WAF en todas las cuentas para todas las distribuciones de CloudFront"
+      "D": "Utilice AWS Firewall Manager para implementar reglas de AWS WAF en todas las cuentas para todas las distribuciones de CloudFront.",
+      "E": "Utilice AWS Shield Advanced para implementar reglas de AWS WAF en todas las cuentas para todas las distribuciones de CloudFront.",
+      "F": "Utilice AWS Security Hub para implementar reglas de AWS WAF en todas las cuentas para todas las distribuciones de CloudFront"
     },
     "correct_answer": "ACD"
   },
@@ -2405,7 +2424,8 @@
       "A": "Cree una plantilla de AWS CloudFormation que aprovisione una VPC y las subredes necesarias. Implemente la plantilla en cada cuenta de AWS.",
       "B": "Cree una plantilla de AWS CloudFormation que aprovisione una VPC y las subredes necesarias. Implementar la plantilla en servicios compartidos. cuenta. Comparta las subredes mediante AWS Resource Access Manager.",
       "C": "Utilice AWS Transit Gateway junto con una VPN de sitio a sitio de AWS para la conectividad a la red local. Comparta la puerta de enlace de tránsito mediante utilizando AWS Resource Access Manager.",
-      "D": "Utilice AWS Site-to-Site VPN para la conectividad a la red local. E. Utilice AWS Direct Connect para la conectividad a la red local."
+      "D": "Utilice AWS Site-to-Site VPN para la conectividad a la red local.",
+      "E": "Utilice AWS Direct Connect para la conectividad a la red local."
     },
     "correct_answer": "BD"
   },
@@ -2574,7 +2594,8 @@
       "A": "Utilice AWS Resource Access Manager para compartir las subredes que alojan las aplicaciones del proveedor de servicios con otras cuentas en el organización.",
       "B": "Colocar las aplicaciones del proveedor de servicios y las aplicaciones del consumidor de servicios en cuentas de AWS en la misma organización.",
       "C": "Desactive el equilibrio de carga entre zonas para Network Load Balancer en todas las implementaciones de aplicaciones de proveedores de servicios.",
-      "D": "Garantizar que los recursos informáticos del consumidor de servicios utilicen el servicio de punto final específico de la zona de disponibilidad mediante el DNS local del punto final. nombre. E. Crear un Plan de Ahorros que brinde cobertura adecuada para el uso planificado de transferencia de datos entre Zonas de Disponibilidad de la organización."
+      "D": "Garantizar que los recursos informáticos del consumidor de servicios utilicen el servicio de punto final específico de la zona de disponibilidad mediante el DNS local del punto final. nombre.",
+      "E": "Crear un Plan de Ahorros que brinde cobertura adecuada para el uso planificado de transferencia de datos entre Zonas de Disponibilidad de la organización."
     },
     "correct_answer": "CD"
   },
@@ -2664,7 +2685,9 @@
       "A": "Cree un plan de AWS Backup con una regla de respaldo para cada uno de los requisitos de retención.",
       "B": "Configurar un plan de AWS Backup para copiar copias de seguridad a otra región.",
       "C": "Crear una función AWS Lambda para replicar copias de seguridad en otra región y enviar una notificación si ocurre una falla.",
-      "D": "Agregar un tema de Amazon Simple Notification Service (Amazon SNS) al plan de respaldo para enviar una notificación para los trabajos terminados que tengan alguna estado excepto BACKUP_JOB_COMPLETED. E. Crear una política de ciclo de vida de instantáneas de Amazon Data Lifecycle Manager (Amazon DLM) para cada uno de los requisitos de retención. F. Configurar instantáneas RDS en cada base de datos."
+      "D": "Agregar un tema de Amazon Simple Notification Service (Amazon SNS) al plan de respaldo para enviar una notificación para los trabajos terminados que tengan alguna estado excepto BACKUP_JOB_COMPLETED.",
+      "E": "Crear una política de ciclo de vida de instantáneas de Amazon Data Lifecycle Manager (Amazon DLM) para cada uno de los requisitos de retención.",
+      "F": "Configurar instantáneas RDS en cada base de datos."
     },
     "correct_answer": "ABD"
   },
@@ -2721,7 +2744,8 @@
       "A": "Cree un punto de acceso S3 para cada aplicación en la cuenta de AWS propietaria del depósito S3. Configurar cada punto de acceso para que sea accesible solo desde la VPC de la aplicación. Actualice la política del depósito para requerir acceso desde un punto de acceso.",
       "B": "Cree un punto de enlace de interfaz para Amazon S3 en la VPC de cada aplicación. Configure la política de punto final para permitir el acceso a un punto de acceso S3. Cree un archivo adjunto de puerta de enlace de VPC para el punto final de S3.",
       "C": "Cree un punto final de puerta de enlace para Amazon S3 en el VPC de cada aplicación. Configure la política de punto final para permitir el acceso a un punto de acceso S3. Especifique la tabla de rutas que se utiliza para acceder al punto de acceso.",
-      "D": "Cree un punto de acceso S3 para cada aplicación en cada cuenta de AWS y adjunte los puntos de acceso al depósito S3. Configurar cada acceso punto para que sea accesible solo desde la VPC de la aplicación. Actualice la política del depósito para requerir acceso desde un punto de acceso. E. Cree un punto de enlace de puerta de enlace para Amazon S3 en la VPC del lago de datos. Adjunte una política de punto final para permitir el acceso al depósito de S3. Especifique el tabla de rutas que se utiliza para acceder al depósito."
+      "D": "Cree un punto de acceso S3 para cada aplicación en cada cuenta de AWS y adjunte los puntos de acceso al depósito S3. Configurar cada acceso punto para que sea accesible solo desde la VPC de la aplicación. Actualice la política del depósito para requerir acceso desde un punto de acceso.",
+      "E": "Cree un punto de enlace de puerta de enlace para Amazon S3 en la VPC del lago de datos. Adjunte una política de punto final para permitir el acceso al depósito de S3. Especifique el tabla de rutas que se utiliza para acceder al depósito."
     },
     "correct_answer": "AC"
   },
@@ -2855,7 +2879,8 @@
       "A": "Verifique que la NACL esté conectada a la subred del servicio de registro para permitir las comunicaciones hacia y desde las subredes NLB. Compruebe que la NACL está conectado a la subred NLB para permitir las comunicaciones hacia y desde las subredes del servicio de registro que se ejecutan en instancias EC2.",
       "B": "Verifique que la NACL esté conectada a las subredes del servicio de registro para permitir las comunicaciones hacia y desde las subredes del punto final de la interfaz. Verifique que la NACL esté conectada a la subred del punto final de la interfaz para permitir las comunicaciones hacia y desde las subredes del servicio de registro en ejecución. en instancias EC2.",
       "C": "Verifique el grupo de seguridad del servicio de registro que se ejecuta en las instancias EC2 para asegurarse de que permita el ingreso desde las subredes NLB.",
-      "D": "Verifique el grupo de seguridad del servicio de registro que se ejecuta en instancias EC2 para asegurarse de que permita el ingreso desde los clientes. E. Verifique el grupo de seguridad del NLB para asegurarse de que permita el ingreso desde las subredes del punto final de la interfaz."
+      "D": "Verifique el grupo de seguridad del servicio de registro que se ejecuta en instancias EC2 para asegurarse de que permita el ingreso desde los clientes.",
+      "E": "Verifique el grupo de seguridad del NLB para asegurarse de que permita el ingreso desde las subredes del punto final de la interfaz."
     },
     "correct_answer": "AC"
   },
@@ -2877,7 +2902,8 @@
       "A": "Evaluar y ajustar las RCU para las tablas de DynamoDB.",
       "B": "Evaluar y ajustar las WCU para las tablas de DynamoDB.",
       "C": "Agregue una capa de Amazon ElastiCache para aumentar el rendimiento de las funciones Lambda.",
-      "D": "Agregar una cola de Amazon Simple Queue Service (Amazon SQS) y una lógica de reprocesamiento entre Amazon S3 y las funciones Lambda. E. Utilice S3 Transfer Acceleration para proporcionar una latencia más baja a los usuarios."
+      "D": "Agregar una cola de Amazon Simple Queue Service (Amazon SQS) y una lógica de reprocesamiento entre Amazon S3 y las funciones Lambda.",
+      "E": "Utilice S3 Transfer Acceleration para proporcionar una latencia más baja a los usuarios."
     },
     "correct_answer": "BD"
   },
@@ -3103,7 +3129,9 @@
       "A": "Cree un tema de Amazon Simple Notification Service (Amazon SNS) con una suscripción de tipo \"Correo electrónico\" dirigida a la lista de correo del equipo.",
       "B": "Cree una tarea denominada \"Correo electrónico\" que reenvíe los argumentos de entrada al tema de SNS.",
       "C": "Agregue un campo Catch a todos los estados de Tarea, Mapa y Paralelo que tengan una declaración de \"ErrorEquals\": [ \"States.ALL\" ] y \"Next”: \"Email\".",
-      "D": "Agregar una nueva dirección de correo electrónico a Amazon Simple Email Service (Amazon SES). Verifique la dirección de correo electrónico. E. Cree una tarea denominada \"Correo electrónico\" que reenvíe los argumentos de entrada a la dirección de correo electrónico de SES. F. Agregue un campo Catch a todos los estados de Tarea, Mapa y Paralelo que tengan una declaración de \"ErrorEquals\": [ \"States.Runtime\" ] y \"Next\": \"Email\"."
+      "D": "Agregar una nueva dirección de correo electrónico a Amazon Simple Email Service (Amazon SES). Verifique la dirección de correo electrónico.",
+      "E": "Cree una tarea denominada \"Correo electrónico\" que reenvíe los argumentos de entrada a la dirección de correo electrónico de SES.",
+      "F": "Agregue un campo Catch a todos los estados de Tarea, Mapa y Paralelo que tengan una declaración de \"ErrorEquals\": [ \"States.Runtime\" ] y \"Next\": \"Email\"."
     },
     "correct_answer": "ABC"
   },
@@ -3169,7 +3197,8 @@
       "A": "Establezca una cuenta de red en la nube de AWS. Cree una VPC privada en la cuenta de red. Configurar una conexión directa de AWS conexión con una VIF privada entre el entorno local y la VPC privada.",
       "B": "Establecer una cuenta de red en la nube de AWS. Cree una VPC privada en la cuenta de red. Configurar una conexión directa de AWS conexión con un VIF público entre el entorno local y la VPC privada.",
       "C": "Cree un punto final de interfaz de Amazon S3 en la cuenta de red.",
-      "D": "Cree un punto de enlace de puerta de enlace de Amazon S3 en la cuenta de red. E. Establecer una cuenta de red en la nube de AWS. Cree una VPC privada en la cuenta de red. VPC pares de las cuentas que alojan los depósitos S3 con la VPC en la cuenta de red."
+      "D": "Cree un punto de enlace de puerta de enlace de Amazon S3 en la cuenta de red.",
+      "E": "Establecer una cuenta de red en la nube de AWS. Cree una VPC privada en la cuenta de red. VPC pares de las cuentas que alojan los depósitos S3 con la VPC en la cuenta de red."
     },
     "correct_answer": "AC"
   },
@@ -3422,7 +3451,8 @@
       "A": "Cree una política de identidad que otorgue al usuario acceso de lectura y escritura. Agregue una condición que especifique que las rutas de S3 deben tener el prefijo $(aws:nombre de usuario). Aplicar la política en el grupo de usuarios de IAM de los científicos.",
       "B": "Configure un seguimiento con AWS CloudTrail para capturar todos los eventos a nivel de objeto en el depósito de S3. Guarde la salida del rastro en otro depósito de S3. uso Amazon Athena para consultar los registros y generar informes.",
       "C": "Habilite el registro de acceso al servidor S3. Configure otro depósito de S3 como destino para la entrega de registros. Utilice Amazon Athena para consultar los registros y generar informes.",
-      "D": "Crear una política de depósito de S3 que otorgue acceso de lectura y escritura a los usuarios del grupo de usuarios de IAM de los científicos. E. Configure un seguimiento con AWS CloudTrail para capturar todos los eventos a nivel de objeto en el depósito de S3 y escribir los eventos en Amazon CloudWatch. Utilice el Conector Amazon Athena CloudWatch para consultar los registros y generar informes."
+      "D": "Crear una política de depósito de S3 que otorgue acceso de lectura y escritura a los usuarios del grupo de usuarios de IAM de los científicos.",
+      "E": "Configure un seguimiento con AWS CloudTrail para capturar todos los eventos a nivel de objeto en el depósito de S3 y escribir los eventos en Amazon CloudWatch. Utilice el Conector Amazon Athena CloudWatch para consultar los registros y generar informes."
     },
     "correct_answer": "AB"
   },
@@ -3514,7 +3544,8 @@
       "A": "Crear un grupo de ENI. Solicite archivos de licencia al proveedor para el grupo y almacene los archivos de licencia en Amazon S3. Crear un arranque script de automatización para descargar un archivo de licencia y adjuntar el ENI correspondiente a una instancia de Amazon EC2.",
       "B": "Crear un grupo de ENI. Solicite archivos de licencia al proveedor para el grupo y almacene los archivos de licencia en una instancia de Amazon EC2. Crear una AMI de la instancia y utilizar esta AMI para todas las instancias EC2 futuras.",
       "C": "Cree un script de automatización de arranque para solicitar un nuevo archivo de licencia del proveedor. Cuando se reciba la respuesta, aplique el archivo de licencia a una instancia de Amazon EC2.",
-      "D": "Edite el script de automatización de arranque para leer la dirección IP del servidor de la base de datos desde el almacén de parámetros de AWS Systems Manager e inyecte el valor en los archivos de configuración locales. E. Editar una instancia de Amazon EC2 para incluir la dirección IP del servidor de la base de datos en los archivos de configuración y volver a crear la AMI para usarla en todas las aplicaciones futuras. Posturas EC2."
+      "D": "Edite el script de automatización de arranque para leer la dirección IP del servidor de la base de datos desde el almacén de parámetros de AWS Systems Manager e inyecte el valor en los archivos de configuración locales.",
+      "E": "Editar una instancia de Amazon EC2 para incluir la dirección IP del servidor de la base de datos en los archivos de configuración y volver a crear la AMI para usarla en todas las aplicaciones futuras. Posturas EC2."
     },
     "correct_answer": "AD"
   },
@@ -3547,7 +3578,9 @@
       "A": "Implementar la API en varias regiones. Configure Amazon Route 53 con nombres de dominio personalizados que enrute el tráfico a cada API regional punto final. Implementar una política de enrutamiento de respuestas multivalor de Route 53.",
       "B": "Cree una nueva clave administrada por el cliente de KMS para varias regiones. Cree una nueva clave de réplica administrada por el cliente de KMS en cada región dentro del alcance.",
       "C": "Replicar el secreto existente de Secrets Manager en otras regiones. Para el secreto replicado de cada región dentro del alcance, seleccione el KMS apropiado clave.",
-      "D": "Crear una nueva clave KMS administrada por AWS en cada región dentro del alcance. Convierta una clave existente en una clave multiregión. Utilice la clave multiregión en otras Regiones. E. Crear un nuevo secreto de Secrets Manager en cada región dentro del alcance. Copie el valor secreto de la región existente al nuevo secreto en cada in- Región de alcance. F. Modificar el proceso de implementación de la función Lambda para repetir la implementación en las regiones dentro del alcance. Activa la opción multiregión para la API existente. Seleccione la función Lambda que se implementa en cada región como backend para la API multiregión."
+      "D": "Crear una nueva clave KMS administrada por AWS en cada región dentro del alcance. Convierta una clave existente en una clave multiregión. Utilice la clave multiregión en otras Regiones.",
+      "E": "Crear un nuevo secreto de Secrets Manager en cada región dentro del alcance. Copie el valor secreto de la región existente al nuevo secreto en cada in- Región de alcance.",
+      "F": "Modificar el proceso de implementación de la función Lambda para repetir la implementación en las regiones dentro del alcance. Activa la opción multiregión para la API existente. Seleccione la función Lambda que se implementa en cada región como backend para la API multiregión."
     },
     "correct_answer": "ABC"
   },
@@ -3768,7 +3801,8 @@
       "A": "Implementar respaldo entre cuentas con bóvedas de AWS Backup en cuentas designadas que no son de producción.",
       "B": "Agregar un SCP que restrinja la modificación de las bóvedas de AWS Backup.",
       "C": "Implementar AWS Backup Vault Lock en modo de cumplimiento.",
-      "D": "Configure la frecuencia de la copia de seguridad, el ciclo de vida y el período de retención para garantizar que siempre exista al menos una copia de seguridad en el nivel frío. E. Configure AWS Backup para escribir todas las copias de seguridad en un depósito de Amazon S3 en una cuenta designada de no producción. Asegúrese de que el depósito S3 tenga Bloqueo de objetos S3 habilitado."
+      "D": "Configure la frecuencia de la copia de seguridad, el ciclo de vida y el período de retención para garantizar que siempre exista al menos una copia de seguridad en el nivel frío.",
+      "E": "Configure AWS Backup para escribir todas las copias de seguridad en un depósito de Amazon S3 en una cuenta designada de no producción. Asegúrese de que el depósito S3 tenga Bloqueo de objetos S3 habilitado."
     },
     "correct_answer": "ABC"
   },
@@ -3804,7 +3838,9 @@
       "A": "Cree una puerta de enlace de tránsito en una cuenta de AWS. Comparta la puerta de enlace de tránsito entre cuentas mediante AWS Resource Access Manager (AWS RAM).",
       "B": "Configurar archivos adjuntos a todas las VPC y VPN.",
       "C": "Configurar tablas de rutas de la puerta de enlace de tránsito. Asocie las VPC y VPN con las tablas de rutas.",
-      "D": "Configurar el emparejamiento de VPC entre las VPC. E. Configurar archivos adjuntos entre las VPC y las VPN. F. Configurar tablas de rutas en las VPC y VPN."
+      "D": "Configurar el emparejamiento de VPC entre las VPC.",
+      "E": "Configurar archivos adjuntos entre las VPC y las VPN.",
+      "F": "Configurar tablas de rutas en las VPC y VPN."
     },
     "correct_answer": "ABC"
   },
@@ -3892,7 +3928,8 @@
       "A": "Modifique el grupo de Auto Scaling configurando la política de actualización para que tenga como objetivo la configuración de lanzamiento más antigua para su reemplazo.",
       "B": "Cree un nuevo grupo de Auto Scaling antes del próximo mantenimiento del parche. Durante la ventana de mantenimiento, parchee ambos grupos y reinicie el instancias.",
       "C": "Cree un Elastic Load Balancer frente al grupo de Auto Scaling. Configure la supervisión para garantizar que vuelvan las comprobaciones de estado del grupo objetivo en buen estado después de que el grupo de Auto Scaling reemplace las instancias terminadas.",
-      "D": "Crear scripts de automatización para parchear una AMI, actualizar la configuración de lanzamiento e invocar una actualización de instancia de Auto Scaling. E. Cree un Elastic Load Balancer frente al grupo de Auto Scaling. Configure la protección de terminación en las instancias."
+      "D": "Crear scripts de automatización para parchear una AMI, actualizar la configuración de lanzamiento e invocar una actualización de instancia de Auto Scaling.",
+      "E": "Cree un Elastic Load Balancer frente al grupo de Auto Scaling. Configure la protección de terminación en las instancias."
     },
     "correct_answer": "CD"
   },
@@ -4125,7 +4162,8 @@
       "A": "Cree una puerta de enlace de volumen de AWS Storage Gateway. Monte un volumen desde Volume Gateway en el servidor de archivos local.",
       "B": "Migrar los directorios de inicio a Amazon FSx para Windows File Server.",
       "C": "Migrar los directorios de inicio a Amazon FSx para Lustre.",
-      "D": "Migrar usuarios remotos a AWS Client VPN. E. Cree una conexión de AWS Direct Connect desde el centro de datos local a AWS."
+      "D": "Migrar usuarios remotos a AWS Client VPN.",
+      "E": "Cree una conexión de AWS Direct Connect desde el centro de datos local a AWS."
     },
     "correct_answer": "BD"
   },
@@ -4136,7 +4174,8 @@
       "A": "Cree una organización en AWS Organizations. Configure AWS Control Tower y active los controles recomendados (barandillas de seguridad). Unirse todas las cuentas a la organización. Clasifique las cuentas de AWS en unidades organizativas.",
       "B": "Utilice la CLI de AWS para enumerar todos los volúmenes no cifrados en todas las cuentas de AWS. Ejecute un script para cifrar todos los volúmenes no cifrados existentes.",
       "C": "Cree una instantánea de cada volumen no cifrado. Cree un nuevo volumen cifrado a partir de la instantánea no cifrada. Separar lo existente volumen y reemplácelo con el volumen cifrado.",
-      "D": "Crear una organización en AWS Organizations. Configure AWS Control Tower y active los controles obligatorios (barandillas). Unirse a todas las cuentas a la organización. Clasifique las cuentas de AWS en unidades organizativas. E. Active AWS CloudTrail. Configure una regla de Amazon EventBridge para detectar y cifrar automáticamente volúmenes no cifrados."
+      "D": "Crear una organización en AWS Organizations. Configure AWS Control Tower y active los controles obligatorios (barandillas). Unirse a todas las cuentas a la organización. Clasifique las cuentas de AWS en unidades organizativas.",
+      "E": "Active AWS CloudTrail. Configure una regla de Amazon EventBridge para detectar y cifrar automáticamente volúmenes no cifrados."
     },
     "correct_answer": "AC"
   },
@@ -4262,7 +4301,9 @@
       "A": "Configure el clúster de base de datos Aurora MySQL para publicar consultas lentas y registros de errores en Amazon CloudWatch Logs.",
       "B": "Implementar el SDK de AWS X-Ray para rastrear las solicitudes HTTP entrantes en las instancias EC2 e implementar el seguimiento de consultas SQL con X-Ray. SDK para Java.",
       "C": "Configurar el clúster de base de datos Aurora MySQL para transmitir consultas lentas y registros de errores a Amazon Kinesis.",
-      "D": "Instalar y configurar un agente de Amazon CloudWatch Logs en las instancias EC2 para enviar los registros de Apache a CloudWatch Logs. E. Habilitar y configurar AWS CloudTrail para recopilar y analizar la actividad de las aplicaciones de Amazon EC2 y Aurora. F. Habilite la evaluación comparativa del rendimiento del clúster de base de datos Aurora MySQL y publique la transmisión en AWS X-Ray."
+      "D": "Instalar y configurar un agente de Amazon CloudWatch Logs en las instancias EC2 para enviar los registros de Apache a CloudWatch Logs.",
+      "E": "Habilitar y configurar AWS CloudTrail para recopilar y analizar la actividad de las aplicaciones de Amazon EC2 y Aurora.",
+      "F": "Habilite la evaluación comparativa del rendimiento del clúster de base de datos Aurora MySQL y publique la transmisión en AWS X-Ray."
     },
     "correct_answer": "ABD"
   },
@@ -4920,7 +4961,8 @@
       "A": "Crear una puerta de tránsito. Adjunte todas las VPC de la empresa y las subredes relevantes a la puerta de enlace de tránsito.",
       "B": "Crear conexiones de peering de VPC entre todas las VPC de la empresa.",
       "C": "Cree un equilibrador de carga de red (NLB) que apunte al recurso informático para la validación de la licencia. Cree un punto final de AWS PrivateLink servicio que está disponible para el VPA de cada cliente: asocie el servicio de punto final con el NLB.",
-      "D": "Crear un dispositivo VPN en la VPC de cada cliente. Conecte la VPC de administración de la empresa a la VPC de cada cliente mediante AWS Site-to- VPN del sitio. E. Crear una conexión de peering de VPC entre la VPC de administración de la empresa y la VPC de cada cliente."
+      "D": "Crear un dispositivo VPN en la VPC de cada cliente. Conecte la VPC de administración de la empresa a la VPC de cada cliente mediante AWS Site-to- VPN del sitio.",
+      "E": "Crear una conexión de peering de VPC entre la VPC de administración de la empresa y la VPC de cada cliente."
     },
     "correct_answer": "AC"
   },
@@ -4931,7 +4973,8 @@
       "A": "Utilice AWS Organizations para crear una organización en la cuenta principal para cada LOB. Luego invite a cada cuenta LOB al lugar apropiado organización.",
       "B": "Utilice AWS Organizations para crear una única organización en la cuenta principal. Luego, invite a la cuenta de AWS de cada LOB a unirse a la organización.",
       "C": "Implementar cuotas de servicios para definir los servicios y características que están permitidas y aplicar las cuotas a cada LOB. según corresponda.",
-      "D": "Cree un SCP que permita solo servicios y funciones aprobados y luego aplique la política a las cuentas LOB. E. Habilite la facturación consolidada en la consola de facturación de la cuenta principal y vincule las cuentas LOB."
+      "D": "Cree un SCP que permita solo servicios y funciones aprobados y luego aplique la política a las cuentas LOB.",
+      "E": "Habilite la facturación consolidada en la consola de facturación de la cuenta principal y vincule las cuentas LOB."
     },
     "correct_answer": "BD"
   },
@@ -5278,7 +5321,8 @@
       "A": "Cree una réplica de lectura entre regiones de la base de datos en la región secundaria. Configure una función de AWS Lambda en la región secundaria para promover la réplica de lectura durante un evento de conmutación por error.",
       "B": "En la región principal, cree una verificación de estado en la base de datos que invocará una función de AWS Lambda cuando se detecte una falla. Programa la función Lambda para recrear la base de datos a partir de la última instantánea de la base de datos en la región secundaria y actualizar el host de Route 53 registros para la base de datos.",
       "C": "Cree una función AWS Lambda para copiar la última copia de seguridad automatizada en la región secundaria cada 2 horas.",
-      "D": "Cree una política de enrutamiento de conmutación por error en la Ruta 53 para el registro DNS de la base de datos. Establezca los puntos finales primarios y secundarios en los puntos finales de cada Región. E. Crear una base de datos de espera activa en la región secundaria. Utilice una función de AWS Lambda para restaurar la base de datos secundaria al último RDS copia de seguridad automática en caso de que falle la base de datos primaria."
+      "D": "Cree una política de enrutamiento de conmutación por error en la Ruta 53 para el registro DNS de la base de datos. Establezca los puntos finales primarios y secundarios en los puntos finales de cada Región.",
+      "E": "Crear una base de datos de espera activa en la región secundaria. Utilice una función de AWS Lambda para restaurar la base de datos secundaria al último RDS copia de seguridad automática en caso de que falle la base de datos primaria."
     },
     "correct_answer": "AD"
   },
@@ -5422,7 +5466,8 @@
       "A": "Aumente las unidades de capacidad de escritura en la tabla de DynamoDB.",
       "B": "Aumentar la memoria disponible para las funciones Lambda.",
       "C": "Aumentar el tamaño de la carga útil de los medidores inteligentes para enviar más datos.",
-      "D": "Transmitir los datos a un flujo de datos de Amazon Kinesis desde API Gateway y procesar los datos en lotes. E. Recopilar datos en una cola FIFO de Amazon SQS, que activa una función Lambda para procesar cada mensaje"
+      "D": "Transmitir los datos a un flujo de datos de Amazon Kinesis desde API Gateway y procesar los datos en lotes.",
+      "E": "Recopilar datos en una cola FIFO de Amazon SQS, que activa una función Lambda para procesar cada mensaje"
     },
     "correct_answer": "AD"
   },
@@ -5499,7 +5544,8 @@
       "A": "Verifique que el Agente de Systems Manager esté instalado en la instancia y se esté ejecutando.",
       "B": "Verificar que a la instancia se le asigne una función de IAM adecuada para Systems Manager.",
       "C": "Verificar la existencia de un punto final de la VPC en la VPC.",
-      "D": "Verificación de que el agente de descubrimiento de aplicaciones de AWS esté configurado. E. Verificar la configuración correcta de los roles vinculados al servicio para Systems Manager."
+      "D": "Verificación de que el agente de descubrimiento de aplicaciones de AWS esté configurado.",
+      "E": "Verificar la configuración correcta de los roles vinculados al servicio para Systems Manager."
     },
     "correct_answer": "AB"
   },
@@ -5610,7 +5656,8 @@
       "A": "Utilice Migration Evaluator Quick Insights para analizar las bases de datos de origen e identificar los procedimientos almacenados que deben migrarse.",
       "B": "Utilice AWS Application Migration Service para analizar las bases de datos de origen e identificar los procedimientos almacenados que deben migrarse.",
       "C": "Utilice la herramienta de conversión de esquemas de AWS (AWS SCT) para analizar las bases de datos de origen en busca de cambios necesarios.",
-      "D": "Utilice AWS Database Migration Service (AWS DMS) para migrar las bases de datos de origen a Amazon RDS. E. Utilice AWS DataSync para migrar los datos de las bases de datos de origen a Amazon RDS."
+      "D": "Utilice AWS Database Migration Service (AWS DMS) para migrar las bases de datos de origen a Amazon RDS.",
+      "E": "Utilice AWS DataSync para migrar los datos de las bases de datos de origen a Amazon RDS."
     },
     "correct_answer": "CD"
   },
@@ -5621,7 +5668,8 @@
       "A": "Cree un trabajo cron semanal en Amazon EventBridge. Utilice el trabajo cron para invocar una función de AWS Lambda para actualizar las instancias EC2 desde el Servidor NAS.",
       "B": "Configurar un volumen Multi-Attach de Amazon Elastic Block Store (Amazon EBS) para que las instancias EC2 lo compartan para acceder al contenido. escribir codigo para sincronizar el volumen EBS con el servidor NAS semanalmente.",
       "C": "Monte un sistema de archivos Amazon Elastic File System (Amazon EFS) en los servidores locales para que actúe como servidor NAS. Copia los datos del blog a el sistema de archivos EFS. Monte el sistema de archivos EFS en las instancias C2 para entregar el contenido.",
-      "D": "Solicite un dispositivo optimizado para almacenamiento en el borde de AWS Snowball. Copie los artefactos de datos estáticos al dispositivo. Envíe el dispositivo a AWS. E. Solicite un dispositivo SSD AWS Snowcons. Copie los artefactos de datos estáticos al dispositivo. Envíe el dispositivo a AWS."
+      "D": "Solicite un dispositivo optimizado para almacenamiento en el borde de AWS Snowball. Copie los artefactos de datos estáticos al dispositivo. Envíe el dispositivo a AWS.",
+      "E": "Solicite un dispositivo SSD AWS Snowcons. Copie los artefactos de datos estáticos al dispositivo. Envíe el dispositivo a AWS."
     },
     "correct_answer": "CD"
   },
@@ -5702,7 +5750,8 @@
       "A": "Cree un conjunto de permisos personalizado de IAM Identity Center para otorgar a los científicos de datos acceso a un prefijo de depósito de S3 que coincida con su nombre de usuario. etiqueta. Utilice una política para limitar el acceso a rutas con la condición ${aws:PrincipalTag/userName}/*.",
       "B": "Cree una función de IAM Identity Center para el grupo de científicos de datos que tiene acceso de lectura y escritura de Amazon S3. Agregar una política de depósito S3 que permite el acceso a la función de IAM Identity Center.",
       "C": "Configurar AWS CloudTrail para registrar eventos de datos de S3 y entregar los registros a un depósito de S3. Utilice Amazon Athena para ejecutar consultas en CloudTrail inicia sesión en Amazon S3 y genera informes.",
-      "D": "Configure AWS CloudTrail para registrar eventos de administración de S3 en CloudWatch. Utilice el conector CloudWatch de Amazon Athena para consultar los registros y generar informes. E. Habilite el registro de acceso de S3 al sistema de archivos EMR (EMRFS). Utilice Amazon S3 Select para consultar registros y generar informes."
+      "D": "Configure AWS CloudTrail para registrar eventos de administración de S3 en CloudWatch. Utilice el conector CloudWatch de Amazon Athena para consultar los registros y generar informes.",
+      "E": "Habilite el registro de acceso de S3 al sistema de archivos EMR (EMRFS). Utilice Amazon S3 Select para consultar registros y generar informes."
     },
     "correct_answer": "AC"
   },
@@ -5848,7 +5897,8 @@
       "A": "Cree un conjunto de configuración de Amazon SES con Amazon Data Firehose como destino. Elija enviar registros a un depósito de Amazon S3.",
       "B": "Habilite el registro de AWS CloudTrail. Especifique un depósito de Amazon S3 como destino de los registros.",
       "C": "Utilice Amazon Athena para consultar los registros en el depósito de Amazon S3 para conocer el destinatario, el asunto y la hora de envío.",
-      "D": "Cree un grupo de registros de Amazon CloudWatch. Configure Amazon SES para enviar registros al grupo de registros. E. Utilice Amazon Athena para consultar los registros en Amazon CloudWatch sobre el destinatario, el asunto y la hora de envío."
+      "D": "Cree un grupo de registros de Amazon CloudWatch. Configure Amazon SES para enviar registros al grupo de registros.",
+      "E": "Utilice Amazon Athena para consultar los registros en Amazon CloudWatch sobre el destinatario, el asunto y la hora de envío."
     },
     "correct_answer": "AC"
   },
