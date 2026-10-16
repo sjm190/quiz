@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS SAP - Preparación Examen</title>
+    <title>Quiz de certificaciones AWS</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
         <div id="login" class="screen active">
             <div class="login-container">
                 <h1>🔐 Acceso al Quiz</h1>
-                <p class="subtitle">AWS Solutions Architect Professional</p>
+                <p class="subtitle">Preparación de certificaciones AWS</p>
                 <form id="login-form" onsubmit="handleLogin(event)">
                     <div class="form-group">
                         <label for="username">Nombre <span class="hint">(solo informativo)</span></label>
@@ -29,42 +29,137 @@
             </div>
         </div>
 
-        <!-- Menu Principal -->
-        <div id="menu" class="screen">
+        <!-- Selector de certificación -->
+        <div id="cert-select" class="screen">
             <div class="user-bar">
                 <button onclick="logout()" class="btn-logout">Cerrar sesión</button>
             </div>
-            <h1>🎓 AWS Solutions Architect Professional</h1>
+            <h1 tabindex="-1" data-focus>🎓 Elegí tu certificación</h1>
+            <p class="subtitle">Podés cambiar de certificación en cualquier momento sin cerrar sesión</p>
+            <p class="load-error hidden" role="alert"></p>
+            <div class="menu-cards" id="cert-cards"></div>
+        </div>
+
+        <!-- Menu SAP-C02 -->
+        <div id="menu" class="screen">
+            <div class="user-bar">
+                <button onclick="goToCertSelect()" class="btn-logout">← Cambiar certificación</button>
+                <button onclick="logout()" class="btn-logout">Cerrar sesión</button>
+            </div>
+            <h1 tabindex="-1" data-focus>🎓 AWS Solutions Architect Professional</h1>
             <p class="subtitle">Preparación para el Examen</p>
+            <p class="load-error hidden" role="alert"></p>
             <div class="menu-cards">
-                <div class="card" onclick="startExam()">
+                <button type="button" class="card" onclick="startExam()">
                     <div class="card-icon">📝</div>
                     <h2>Modo Examen</h2>
                     <p>75 preguntas aleatorias<br>180 minutos<br>Simulación real del examen</p>
-                </div>
-                <div class="card" onclick="startPractice()">
+                </button>
+                <button type="button" class="card" onclick="startPractice()">
                     <div class="card-icon">🎯</div>
                     <h2>Modo Práctica</h2>
                     <p>Preguntas aleatorias<br>Sin límite de tiempo<br>Respuesta inmediata</p>
-                </div>
-                <div class="card" onclick="showStudyTopics()">
+                </button>
+                <button type="button" class="card" onclick="showStudyTopics()">
                     <div class="card-icon">📚</div>
                     <h2>Modo Estudio</h2>
                     <p>Agrupado por temas<br>Pilares AWS<br>Estudio dirigido</p>
-                </div>
+                </button>
             </div>
+            <p class="menu-busy hidden">Cargando banco…</p>
             <div class="stats-bar">
                 <span id="total-questions">0</span> preguntas disponibles
             </div>
         </div>
 
-        <!-- Pantalla de Estudio por Temas -->
+        <!-- Menu SCS-C03 -->
+        <div id="scs-menu" class="screen">
+            <div class="user-bar">
+                <button onclick="goToCertSelect()" class="btn-logout">← Cambiar certificación</button>
+                <button onclick="logout()" class="btn-logout">Cerrar sesión</button>
+            </div>
+            <h1 tabindex="-1" data-focus>🔐 AWS Security Specialty</h1>
+            <p class="subtitle">Preparación para el Examen SCS-C03</p>
+            <p class="load-error hidden" role="alert"></p>
+            <div class="menu-cards">
+                <button type="button" class="card" onclick="startScsExam()">
+                    <div class="card-icon">📝</div>
+                    <h2>Simulacro real</h2>
+                    <p>65 preguntas aleatorias<br>170 minutos<br>Corte 750 de 1000 (escalado estimado)</p>
+                </button>
+                <button type="button" class="card" onclick="startScsPractice()">
+                    <div class="card-icon">🎯</div>
+                    <h2>Banco completo</h2>
+                    <p>Las 133 preguntas puntuables<br>Sin límite de tiempo<br>Verificar + explicación</p>
+                </button>
+                <button type="button" class="card" onclick="showScsStudyFilter()">
+                    <div class="card-icon">📚</div>
+                    <h2>Estudio / Flashcards</h2>
+                    <p>520 preguntas de estudio<br>Respuesta, explicación y fuentes<br>Filtro por dominio y test</p>
+                </button>
+                <button type="button" class="card" onclick="startScsReview()">
+                    <div class="card-icon">🧩</div>
+                    <h2>Repaso: HOTSPOT y preguntas con imagen</h2>
+                    <p>10 preguntas no puntuables<br>7 HOTSPOT + 3 de opciones con imagen<br>Con revelado de respuesta</p>
+                </button>
+            </div>
+            <p class="menu-busy hidden">Cargando banco…</p>
+            <div class="stats-bar" id="scs-stats"></div>
+        </div>
+
+        <!-- Pantalla de Estudio por Temas (SAP-C02) -->
         <div id="study-topics" class="screen">
             <div class="header-bar">
                 <button onclick="goToMenu()">← Volver</button>
-                <h2>Modo Estudio - Seleccionar Tema</h2>
+                <h2 tabindex="-1" data-focus>Modo Estudio - Seleccionar Tema</h2>
             </div>
             <div id="topics-list" class="topics-grid"></div>
+        </div>
+
+        <!-- Filtros de estudio (SCS-C03) -->
+        <div id="scs-study-filter" class="screen">
+            <div class="header-bar">
+                <button onclick="goToMenu()">← Volver</button>
+                <h2 tabindex="-1" data-focus>📚 Estudio — Elegí qué repasar</h2>
+            </div>
+            <p class="load-error hidden" role="alert"></p>
+            <div class="form-group">
+                <label for="filter-domain">Dominio</label>
+                <select id="filter-domain"></select>
+            </div>
+            <div class="form-group">
+                <label for="filter-test">Practice Test</label>
+                <select id="filter-test"></select>
+            </div>
+            <div class="form-group">
+                <label for="filter-shuffle"><input type="checkbox" id="filter-shuffle"> Mezclar el orden</label>
+            </div>
+            <p id="filter-count" aria-live="polite"></p>
+            <button id="btn-start-study" class="btn-primary" onclick="startFlashcards()">Empezar</button>
+        </div>
+
+        <!-- Flashcard (estudio, HOTSPOT y opciones-imagen) -->
+        <div id="flashcard" class="screen">
+            <div class="header-bar">
+                <button onclick="goToMenu()">← Volver</button>
+                <h2 id="fc-heading" tabindex="-1" data-focus>📚 Estudio</h2>
+                <span id="fc-counter" class="progress"></span>
+            </div>
+            <p id="fc-badge" class="fc-badge"></p>
+            <p id="fc-img-notice" class="img-notice hidden"></p>
+            <div id="fc-question" class="question-text"></div>
+            <p id="fc-prompt" class="fc-prompt hidden"></p>
+            <button id="fc-reveal" class="btn-primary" onclick="revealFlashcard()">Mostrar respuesta</button>
+            <div id="fc-answer-box" class="hidden" tabindex="-1">
+                <h3>Respuesta</h3>
+                <div id="fc-answer"></div>
+                <div id="fc-explanation-box" class="hidden"><h3>Explicación</h3><div id="fc-explanation"></div></div>
+                <div id="fc-sources-box" class="hidden"><h3>Fuentes</h3><ul id="fc-sources" class="sources"></ul></div>
+            </div>
+            <div class="quiz-footer">
+                <button id="fc-prev" onclick="fcPrev()">← Anterior</button>
+                <button id="fc-next" onclick="fcNext()">Siguiente →</button>
+            </div>
         </div>
 
         <!-- Pantalla de Quiz -->
@@ -77,8 +172,17 @@
                 </div>
             </div>
             <div id="question-container">
-                <div id="question-text" class="question-text"></div>
-                <div id="options-container" class="options"></div>
+                <p id="img-notice" class="img-notice hidden"></p>
+                <div id="question-text" class="question-text" tabindex="-1"></div>
+                <p id="select-hint" class="select-hint hidden"></p>
+                <fieldset id="options-container" class="options">
+                    <legend class="sr-only">Opciones de respuesta</legend>
+                </fieldset>
+                <p id="answer-feedback" class="answer-feedback hidden" role="status" aria-live="polite"></p>
+                <div id="answer-explanation" class="explanation-box hidden">
+                    <h3>Explicación</h3>
+                    <pre class="explanation"></pre>
+                </div>
             </div>
             <div class="quiz-footer">
                 <button id="btn-prev" onclick="prevQuestion()" disabled>← Anterior</button>
@@ -91,7 +195,7 @@
         <!-- Pantalla de Resultados -->
         <div id="results" class="screen">
             <div class="results-container">
-                <h2>📊 Resultados</h2>
+                <h2 tabindex="-1" data-focus>📊 Resultados</h2>
                 <div id="score-circle" class="score-circle"></div>
                 <div id="results-details"></div>
                 <button onclick="goToMenu()" class="btn-primary">Volver al Menú</button>

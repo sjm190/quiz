@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Self-test — funciones puras de app.js</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { padding: 20px; font-family: ui-monospace, Menlo, monospace; }
+        .pass { color: #3fb950; }
+        .fail { color: #f85149; }
+        #out { white-space: pre-wrap; line-height: 1.6; font-size: .9em; }
+        h1 { color: #58a6ff; font-size: 1.4em; margin-bottom: 12px; }
+        #tally { margin: 12px 0; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+    <h1>Self-test de las funciones puras de app.js</h1>
+    <p id="tally">Corriendo…</p>
+    <div id="out"></div>
+
+    <!-- Nodos mínimos que app.js necesita al cargar. Esta página NO se
+         despliega: vercel.json publica index.html de forma literal y no hay
+         glob *.html (diseño §5.2). -->
+    <div id="cert-cards"></div>
+    <fieldset id="options-container"></fieldset>
+    <select id="filter-domain"></select>
+    <select id="filter-test"></select>
+    <div id="flashcard" class="screen"></div>
+
+    <script>
+        // app.js corre checkSession() al cargar; sin sesión no toca el DOM
+        // de pantallas que esta página no tiene.
+        try { sessionStorage.clear(); } catch (e) { /* modo privado */ }
+    </script>
+    <script src="app.js"></script>
+    <script>
+    (async function () {
+        const out = document.getElementById('out');
+        let pass = 0, fail = 0;
+
+        function check(name, fn) {
+            let okFlag = false, detail = '';
+            try { okFlag = fn() === true; }
+            catch (err) { detail = ' — ' + err.message; }
+            const line = document.createElement('div');
+            line.className = okFlag ? 'pass' : 'fail';
+            line.textContent = (okFlag ? 'PASS ' : 'FAIL ') + name + detail;
+            out.appendChild(line);
+            if (okFlag) { pass++; console.log('PASS', name); }
+            else { fail++; console.error('FAIL', name, detail); }
+        }
+
+        const eq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
+        // ---- funciones puras sin datos externos
+        check('isCorrect: conjunto exacto', () =>
+            isCorrect(['B', 'A'], ['A', 'B']) === true &&
+            isCorrect(['A'], ['A', 'B']) === false &&
+            isCorrect(['A', 'C'], ['A', 'B']) === false &&
+            isCorrect([], []) === true);
+
+        check("normalizeLegacyAnswer('AC') -> ['A','C']", () =>
+            eq(normalizeLegacyAnswer('AC'), ['A', 'C']) &&
+            eq(normalizeLegacyAnswer('CA'), ['A', 'C']) &&
+            eq(normalizeLegacyAnswer(''), []) &&
+            eq(normalizeLegacyAnswer(null), []));
+
+        check('isValidCertId', () =>
+            isValidCertId('sap-c02') === true &&
+            isValidCertId('scs-c03') === true &&
+            isValidCertId('toString') === false &&
+            isValidCertId('nope') === false);
+
+        check('scaledScore 1000 / 100 / 765', () =>
+            scaledScore(65, 65) === 1000 &&
+            scaledScore(0, 65) === 100 &&
+            scaledScore(48, 65) === 765);
+
+        check('buildScorablePool(items)', () =>
+            buildScorablePool([{ scorable: true }, { scorable: false },
+                               { scorable: true }]).length === 2 &&
+            buildScorablePool([]).length === 0);
+
+        check("computeResults verified con 0 verificadas -> display '—'",
+            () => {
+                const r = computeResults({ scoring: 'verified' }, null,
+                    [{ correct: ['A'] }, { correct: ['B'] }], {});
+                return r.display === '—' && r.isNaN === false &&
+                       r.pass === null && r.verified === 0 &&
+                       r.detail.indexOf('0 de 2') > -1;
+            });
+
+        check('computeResults verified con 1 de 2 verificadas', () => {
+            const r = computeResults({ scoring: 'verified' }, null,
+                [{ correct: ['A'] }, { correct: ['B'] }],
+                { 0: ['A'], '0_checked': true });
+            return r.verified === 1 && r.correct === 1 &&
+                   r.display === '1 de 1 verificadas' && r.pass === null;
+        });
+
+        check('computeResults percent usa exam.passPercent', () => {
+            const qs = [];
+            for (let i = 0; i < 4; i++) qs.push({ correct: ['A'] });
+            const a = { 0: ['A'], 1: ['A'], 2: ['A'], 3: ['B'] };
+            const r = computeResults({ scoring: 'percent' },
+                { passPercent: 75 }, qs, a);
+            return r.display === '75%' && r.pass === true;
+        });
+
+        check('computeResults scaled usa exam.passing_scaled_score', () => {
+            const qs = [];
+            for (let i = 0; i < 65; i++) qs.push({ correct: ['A'] });
+            const a = {};
+            for (let i = 0; i < 48; i++) a[i] = ['A'];
+            const r = computeResults({ scoring: 'scaled' },
+                { passing_scaled_score: 750 }, qs, a);
+            return r.display === '765' && r.pass === true;
+        });
+
+        check('computeResults nunca produce NaN', () => {
+            const modes = ['percent', 'scaled', 'verified', null];
+            return modes.every(s => {
+                const r = computeResults({ scoring: s }, null, [], {});
+                return r.isNaN === false &&
+                       r.display.indexOf('NaN') === -1;
+            });
+        });
+
+        check('filterStudy devuelve array nuevo y ordenado', () => {
+            const items = [
+                { number: 9, domain: 4, test: 1 },
+                { number: 2, domain: 4, test: 1 },
+                { number: 5, domain: 3, test: 2 }
+            ];
+            const r = filterStudy(items, 4, 'all');
+            return r !== items && r.length === 2 &&
+                   r[0].number === 2 && r[1].number === 9 &&
+                   items[0].number === 9 &&
+                   filterStudy(items, 4, 5).length === 0 &&
+                   filterStudy(items, 'all', 'all').length === 3;
+        });
+
+        // ---- integridad de MODE_CFG (hallazgos 2, 4 y 9)
+        check('MODE_CFG: 6 modos, cert válida, sin minutes/pass*', () => {
+            const keys = Object.keys(MODE_CFG);
+            if (keys.length !== 6) return false;
+            return keys.every(k => {
+                const c = MODE_CFG[k];
+                if (!isValidCertId(c.cert)) return false;
+                if ('minutes' in c || 'passScaled' in c ||
+                    'passPercent' in c) return false;
+                if (typeof c.timed !== 'boolean') return false;
+                if (c.screen === 'quiz') {
+                    return typeof c.showCheck === 'boolean' &&
+                           typeof c.showFinish === 'boolean' &&
+                           typeof c.hideNextOnLast === 'boolean' &&
+                           typeof c.confirmExit === 'boolean';
+                }
+                return true;
+            });
+        });
+
+        check('CERTIFICATIONS: showSelectHint booleano en las dos', () =>
+            Object.keys(CERTIFICATIONS).length === 2 &&
+            Object.keys(CERTIFICATIONS).every(k =>
+                typeof CERTIFICATIONS[k].showSelectHint === 'boolean' &&
+                typeof CERTIFICATIONS[k].dataFiles === 'object' &&
+                typeof CERTIFICATIONS[k].dataFiles.practice === 'string'));
+
+        check('EXAM_FALLBACK tiene los 5 campos', () =>
+            EXAM_FALLBACK.questions === 65 &&
+            EXAM_FALLBACK.minutes === 170 &&
+            EXAM_FALLBACK.passing_scaled_score === 750 &&
+            EXAM_FALLBACK.scale_min === 100 &&
+            EXAM_FALLBACK.scale_max === 1000);
+
+        // ---- normalizeBank contra los tres archivos reales
+        const legacyRaw = await (await fetch('questions.json')).json();
+        const practiceRaw =
+            await (await fetch('scs-c03-practica.json')).json();
+        const studyRaw = await (await fetch('scs-c03-estudio.json')).json();
+
+        check('normalizeBank legacy: 625 ítems, 484 single, 141 multi', () => {
+            const b = normalizeBank(legacyRaw, CERTIFICATIONS['sap-c02']);
+            const multi = b.questions.filter(q => q.correct.length > 1);
+            const single = b.questions.filter(q => q.correct.length === 1);
+            const q483 = b.questions.find(q => q.number === 483);
+            return b.meta.schema_version === 0 &&
+                   b.questions.length === 625 &&
+                   single.length === 484 && multi.length === 141 &&
+                   !!q483 && Object.keys(q483.options).length === 3 &&
+                   q483.id === 'SAP483' && q483.scorable === true;
+        });
+
+        check('normalizeBank práctica: 143 ítems, 133 scorable, 170 min',
+            () => {
+                const b = normalizeBank(practiceRaw,
+                                        CERTIFICATIONS['scs-c03']);
+                const hot = b.questions.filter(q => q.type === 'hotspot');
+                return b.meta.schema_version === 1 &&
+                       b.questions.length === 143 &&
+                       buildScorablePool(b.questions).length === 133 &&
+                       hot.length === 7 &&
+                       b.meta.exam.minutes === 170 &&
+                       b.meta.exam.passing_scaled_score === 750;
+            });
+
+        check('normalizeBank estudio: 520 ítems, dominio 4 -> 31', () => {
+            const b = normalizeBank(studyRaw, CERTIFICATIONS['scs-c03']);
+            return b.questions.length === 520 &&
+                   filterStudy(b.questions, 4, 'all').length === 31 &&
+                   filterStudy(b.questions, 4, 5).length === 0 &&
+                   filterStudy(b.questions, 'all', 3).length === 65;
+        });
+
+        check('normalizeBank con schema_version 2 lanza (F4)', () => {
+            try {
+                normalizeBank({ meta: { schema_version: 2 }, questions: [] },
+                              CERTIFICATIONS['scs-c03']);
+                return false;
+            } catch (err) { return err instanceof FormatError; }
+        });
+
+        check('normalizeBank sin questions lanza (F4)', () => {
+            try {
+                normalizeBank({ meta: { schema_version: 1 } },
+                              CERTIFICATIONS['scs-c03']);
+                return false;
+            } catch (err) { return err instanceof FormatError; }
+        });
+
+        check('normalizeBank descarta el ítem inválido, no el banco (F5)',
+            () => {
+                const b = normalizeBank({
+                    meta: { schema_version: 1, set: 'practice-exam' },
+                    questions: [
+                        { id: 'AQ1', type: 'mcq', question: 'ok',
+                          options: { A: 'a', B: 'b' }, correct_answer: ['A'],
+                          scorable: true },
+                        { id: 'AQ2', type: 'mcq', question: 'mala',
+                          options: { A: 'a' }, correct_answer: ['Z'] }
+                    ]
+                }, CERTIFICATIONS['scs-c03']);
+                return b.questions.length === 1 && b.dropped === 1;
+            });
+
+        check('meta.exam fuera de rango se descarta (V5)', () => {
+            const b = normalizeBank({
+                meta: { schema_version: 1, set: 'practice-exam',
+                        exam: { minutes: 0, passing_scaled_score: 750 } },
+                questions: [{ id: 'AQ1', type: 'mcq', question: 'ok',
+                              options: { A: 'a', B: 'b' },
+                              correct_answer: ['A'], scorable: true }]
+            }, CERTIFICATIONS['scs-c03']);
+            return b.meta.exam === null;
+        });
+
+        check('toCard study por answer_format', () => {
+            const c = toCard({
+                id: 'Q54', test: 1, domain_name: 'Data Protection',
+                question: 'q', prompt: 'p', answer: ['{ }'],
+                answer_format: 'code', explanation: 'e',
+                sources: ['https://x.example.com/a']
+            }, 'study');
+            return c.answer.type === 'code' && c.prompt === 'p' &&
+                   c.badge.indexOf('Q54') === 0 &&
+                   c.hasMissingImages === false;
+        });
+
+        check('toCard image-options marca la correcta', () => {
+            const c = toCard({
+                id: 'AQ4', type: 'mcq', question: 'q',
+                options: { A: 'a', B: 'b' }, correct: ['B'],
+                explanation: null, hasMissingImages: true,
+                imageDependency: 'options'
+            }, 'image-options');
+            return c.answer.type === 'options' &&
+                   c.answer.values[1].indexOf('✓ B.') === 0 &&
+                   c.imageDependency === 'options';
+        });
+
+        const tally = document.getElementById('tally');
+        tally.textContent = pass + ' PASS, ' + fail + ' FAIL';
+        tally.className = fail ? 'fail' : 'pass';
+    })().catch(err => {
+        const tally = document.getElementById('tally');
+        tally.textContent = 'El self-test se cayó: ' + err.message;
+        tally.className = 'fail';
+        console.error(err);
+    });
+    </script>
+</body>
+</html>
