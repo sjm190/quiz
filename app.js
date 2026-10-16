@@ -871,17 +871,7 @@ function startScsPractice() {
     startQuizMode('scs-bank', shuffle(buildScorablePool(allQuestions)));
 }
 
-function startScsReview() {
-    const items = allQuestions.filter(q => !q.scorable);
-    mode = 'scs-reveal';
-    fcItems = items.map(it => toCard(
-        it, it.type === 'hotspot' ? 'hotspot' : 'image-options'));
-    fcIndex = 0;
-    document.getElementById('fc-heading').textContent =
-        '🧩 Repaso: HOTSPOT y preguntas con imagen';
-    showScreen('flashcard');
-    renderFlashcard();
-}
+
 
 // =====================================================================
 // Timer
