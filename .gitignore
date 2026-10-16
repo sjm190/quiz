@@ -1,0 +1,6 @@
+# Bytecode de Python (generado al correr dev-server.py en local)
+__pycache__/
+*.py[cod]
+
+# macOS
+.DS_Store
